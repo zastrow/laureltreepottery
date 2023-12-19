@@ -24,7 +24,6 @@ export default async function decorate(block) {
 	navHomeLink.classList.add('nav__home-link');
 	navHomeLink.parentElement.classList.remove('button-container');
 	navHomeLink.parentElement.classList.add('nav__home-link-container');
-	navHomeLink.setAttribute('href','/');
 
 
 	nav.querySelectorAll(':scope .default-content-wrapper > ul').forEach((navList) => {
@@ -36,13 +35,6 @@ export default async function decorate(block) {
 	});
 
 	nav.querySelectorAll(':scope .default-content-wrapper > ul a').forEach((navLink) => {
-		const linkPath = navLink.getAttribute('href');
-		const newPath = (importLink) => {
-			const reformattedPath = importLink.replace('#nav-', '');
-			return `/${reformattedPath}`
-		};
-
-		navLink.setAttribute('href', `${newPath(linkPath)}`);
 		navLink.classList.add('nav__link')
 		navLink.removeAttribute('title');
 	});
