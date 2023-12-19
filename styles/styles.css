@@ -1,7 +1,41 @@
-:root {
-  color-scheme: light dark;
+html {
+  height: 100%;
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  all: unset;
+  min-height: 100%;
+  font-family: var(--font-sans);
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+div:empty,
+div:has(> div:only-child:empty) {
+  display: none;
+}
+
+main {
+  flex-grow: 2;
+}
+
+main > .section > .default-content-wrapper {
+  width: min(calc(100% - var(--size-6)), var(--size-content-max));
+  margin-inline: auto;
+}
+
+.two-column {
+  width: min(calc(100% - var(--size-6)), var(--size-content-max));
+  margin: var(--size-4) auto;
+}
+
+.two-column > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--size-4);
 }

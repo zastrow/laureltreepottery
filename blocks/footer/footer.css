@@ -1,0 +1,8 @@
+.footer-wrapper {
+	background-color: var(--color-gray-2);
+}
+
+.footer {
+	width: min(calc(100% - var(--size-6)), var(--size-content-max));
+	margin-inline: auto;
+}
