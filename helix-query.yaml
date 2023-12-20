@@ -23,10 +23,10 @@ indices:
         value: |
           parseTimestamp(headers['last-modified'], 'ddd, DD MMM YYYY hh:mm:ss GMT')
       price:
-        select: head > meta[property="price"]
+        select: head > meta[name="price"]
         value: |
           attribute(el, 'content')
       sold:
-        select: head > meta[property="sold"]
+        select: head > meta[name="status"]
         value: |
           attribute(el, 'content')
