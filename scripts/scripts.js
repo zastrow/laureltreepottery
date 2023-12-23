@@ -16,12 +16,36 @@ import {
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
 /**
+ * Swaps icon img tags for the SVG source file.
+ * @param {Element} main The container element
+ */
+async function loadSVGs(main) {
+  const allIcons = main.querySelectorAll('.icon');
+
+  allIcons.forEach(async icon => {
+    const src = icon.querySelector('img');
+    const file = src.getAttribute('src');
+    const resp = await fetch(file);
+    const html = await resp.text();
+
+    try {
+      icon.innerHTML = DOMPurify.sanitize(html);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Load SVG failed', error);
+    }
+
+  });
+}
+
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
 function buildAutoBlocks(main) {
   try {
-    null
+    loadSVGs(main)
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

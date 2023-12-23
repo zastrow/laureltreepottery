@@ -25,12 +25,12 @@ main {
 }
 
 main > .section > .default-content-wrapper {
-  width: min(calc(100% - var(--size-6)), var(--size-content-max));
+  width: var(--width-content);
   margin-inline: auto;
 }
 
 .two-column {
-  width: min(calc(100% - var(--size-6)), var(--size-content-max));
+  width: var(--width-content);
   margin: var(--size-4) auto;
 }
 

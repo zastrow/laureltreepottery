@@ -56,6 +56,7 @@
 	--size-14: 20rem;
 	--size-15: 30rem;
   --size-content-max: 80rem;
+	--width-content: min(calc(100% - var(--size-6)), var(--size-content-max));
 	--size-fluid-1: clamp(0.5rem, 1vw, 1rem);
 	--size-fluid-2: clamp(1rem, 2vw, 1.5rem);
 	--size-fluid-3: clamp(1.5rem, 3vw, 2rem);
@@ -476,13 +477,13 @@
 	--radius-conditional-6: clamp(0px, calc(100vw - 100%) * 1e5, var(--radius-6))
 }
 
-@media (prefers-color-scheme:dark) {
+/* @media (prefers-color-scheme:dark) {
 	:where(html) {
 		--shadow-color: 220 40% 2%;
 		--shadow-strength: 25%;
 		--inner-shadow-highlight: inset 0 -0.5px 0 0 hsla(0, 0%, 100%, 0.067), inset 0 0.5px 0 0 rgba(0, 0, 0, 0.467)
 	}
-}
+} */
 
 @keyframes fade-in {
 	to {
