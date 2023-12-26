@@ -1,8 +1,10 @@
 .footer-wrapper {
 	background-color: var(--color-gray-2);
+	margin-block-start: var(--size-8);
 }
 
 .footer {
+	padding-block: var(--size-6);
 	width: min(calc(100% - var(--size-6)), var(--size-content-max));
 	margin-inline: auto;
 }

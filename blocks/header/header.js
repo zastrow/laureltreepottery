@@ -1,8 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
-
-
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -22,13 +20,11 @@ export default async function decorate(block) {
 	const navHomeLink = nav.querySelector(':scope .default-content-wrapper:first-child > .button-container > .button');
 	navHomeLink.classList.remove('button');
 	navHomeLink.classList.add('nav__home-link');
-	navHomeLink.parentElement.classList.remove('button-container');
-	navHomeLink.parentElement.classList.add('nav__home-link-container');
+	navHomeLink.parentElement.after(navHomeLink);
+	navHomeLink.previousSibling.remove();
 
-
-	nav.querySelectorAll(':scope .default-content-wrapper > ul').forEach((navList) => {
-		navList.classList.add('nav__list')
-	});
+	const navList = nav.querySelector(':scope .default-content-wrapper > ul');
+	navList.classList.add('nav__list');
 
 	nav.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navItem) => {
 		navItem.classList.add('nav__item')
@@ -39,9 +35,44 @@ export default async function decorate(block) {
 		navLink.removeAttribute('title');
 	});
 
-
 	const navWrapper = document.createElement('div');
 	navWrapper.className = 'nav-wrapper';
 	navWrapper.append(nav);
 	block.append(navWrapper);
+	navWrapper.previousSibling.remove();
+
+	const toggleQueryWidth = window.matchMedia("(max-width: calc(60rem - 1px))");
+
+	if (toggleQueryWidth.matches) {
+		const navToggleButton = document.createElement('button');
+
+		navToggleButton?.classList.add('nav__toggle');
+		navToggleButton?.classList.add('nav__toggle--closed');
+		navToggleButton?.setAttribute('type','button');
+		navHomeLink.after(navToggleButton);
+
+		function navToggleClose() {
+			navToggleButton.setAttribute('aria-label','Open Navigation');
+			navToggleButton.setAttribute('aria-expanded', false);
+			navList.setAttribute('aria-hidden', true);
+			navToggleButton.innerText = 'Menu';
+		}
+
+		function navToggleOpen() {
+			navToggleButton.setAttribute('aria-label','Close Navigation');
+			navToggleButton.setAttribute('aria-expanded', true);
+			navList.setAttribute('aria-hidden', false);
+			navToggleButton.innerText = 'Close';
+		}
+
+		navToggleClose();
+
+		navToggleButton.addEventListener('click', () => {
+			if (navToggleButton.getAttribute('aria-expanded') === "true") {
+				navToggleClose();
+			} else {
+				navToggleOpen();
+			}
+		});
+	}
 }

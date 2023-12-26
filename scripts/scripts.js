@@ -3,6 +3,7 @@ import {
   buildBlock,
   loadHeader,
   loadFooter,
+  loadPurchaseInfo,
   decorateButtons,
   decorateIcons,
   decorateSections,
@@ -30,12 +31,30 @@ async function loadSVGs(main) {
 
     try {
       icon.innerHTML = DOMPurify.sanitize(html);
+      icon.querySelector('svg').classList.add('icon__svg');
+
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Load SVG failed', error);
     }
 
   });
+}
+
+function pageTitle(main) {
+  const pageTitle = main.querySelector('h1');
+  pageTitle.classList.add('page-title');
+}
+
+function buildPriceBlock(main) {
+  const priceMeta = document.querySelector('head > meta[name="price"]');
+  if (priceMeta) {
+    const pageTitle = main.querySelector('h1');
+    const priceBlock = document.createElement('p');
+    priceBlock.innerText = priceMeta.getAttribute('content');
+    priceBlock.classList.add('price-block');
+    pageTitle?.after(priceBlock);
+  }
 }
 
 
@@ -45,7 +64,9 @@ async function loadSVGs(main) {
  */
 function buildAutoBlocks(main) {
   try {
-    loadSVGs(main)
+    loadSVGs(main);
+    pageTitle(main)
+    buildPriceBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -95,6 +116,7 @@ async function loadLazy(doc) {
 
   loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
+  loadPurchaseInfo(doc.querySelector('main .product-image-container > .default-content-wrapper:first-child'));
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));

@@ -652,6 +652,21 @@ async function loadFooter(footer) {
   return loadBlock(footerBlock);
 }
 
+
+
+/**
+ * Loads a block named 'purchase-info' into product page
+ * @param {Element} purchase-info purchase-info element
+ * @returns {Promise}
+ */
+async function loadPurchaseInfo(purchaseInfo) {
+  const purchaseInfoBlock = buildBlock('purchase-info', '');
+  purchaseInfo.append(purchaseInfoBlock);
+  decorateBlock(purchaseInfoBlock);
+  return loadBlock(purchaseInfoBlock);
+}
+
+
 /**
  * Load LCP block and/or wait for LCP in default content.
  * @param {Array} lcpBlocks Array of blocks
@@ -693,6 +708,7 @@ export {
   loadCSS,
   loadFooter,
   loadHeader,
+  loadPurchaseInfo,
   loadScript,
   readBlockConfig,
   sampleRUM,
