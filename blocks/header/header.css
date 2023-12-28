@@ -7,8 +7,6 @@
 	margin-inline: auto;
 	padding-block: var(--size-6);
 	border-block-end: 1px solid currentcolor;
-	container-type: inline-size;
-	container-name: nav;
 }
 
 .nav > .section > .default-content-wrapper {
@@ -39,6 +37,15 @@
 
 .nav__list[aria-hidden="true"] {
 	display: none;
+}
+
+@media (min-width: 50rem) {
+	.nav__list {
+		position: static;
+		flex-direction: row;
+		height: unset;
+		background-color: unset;
+	}
 }
 
 .nav__item {
@@ -101,6 +108,6 @@
 .nav__toggle[aria-expanded="true"] {
 	position: fixed;
 	inset-block-start: calc(var(--size-6) + 0.125);
-	inset-inline-end: 0;
+	inset-inline-end: var(--size-3);
 	z-index: var(--layer-10);
 }

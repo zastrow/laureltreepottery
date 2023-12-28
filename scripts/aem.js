@@ -614,7 +614,7 @@ function decorateBlock(block) {
     block.dataset.blockName = shortBlockName;
     block.dataset.blockStatus = 'initialized';
     const blockWrapper = block.parentElement;
-    blockWrapper.classList.add(`${shortBlockName}-wrapper`);
+    blockWrapper?.classList.add(`${shortBlockName}-wrapper`);
     const section = block.closest('.section');
     if (section) section.classList.add(`${shortBlockName}-container`);
   }
@@ -661,7 +661,7 @@ async function loadFooter(footer) {
  */
 async function loadPurchaseInfo(purchaseInfo) {
   const purchaseInfoBlock = buildBlock('purchase-info', '');
-  purchaseInfo.append(purchaseInfoBlock);
+  purchaseInfo?.append(purchaseInfoBlock);
   decorateBlock(purchaseInfoBlock);
   return loadBlock(purchaseInfoBlock);
 }

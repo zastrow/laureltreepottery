@@ -43,7 +43,7 @@ async function loadSVGs(main) {
 
 function pageTitle(main) {
   const pageTitle = main.querySelector('h1');
-  pageTitle.classList.add('page-title');
+  pageTitle?.classList.add('page-title');
 }
 
 function buildPriceBlock(main) {
